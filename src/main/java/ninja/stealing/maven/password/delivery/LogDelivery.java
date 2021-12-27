@@ -2,6 +2,7 @@ package ninja.stealing.maven.password.delivery;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.maven.plugin.logging.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,18 +21,19 @@ public class LogDelivery implements Delivery {
 	@Override
 	public void deliver(List<Extraction> extractions) {
 		ObjectMapper mapper = new ObjectMapper();
-		log.info("Delivering extraction trought log");
+		ObjectNode logNode = mapper.createObjectNode();
+		log.info("Delivering extraction through log");
 		for (Extraction extraction: extractions) {
-			log.info("Extraction: " + extraction.getExtractorId());
-			String json = "";
-			 try {
-				json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(extraction.getContent());
-			} catch (JsonProcessingException e) {
-				json = "Can't process json";
-			}
-			log.info("  - Content: " + json);
-
+			log.info("Extracting: " + extraction.getExtractorId());
+			logNode.put(extraction.getExtractorId(),extraction.getContent());
 		}
+		String json = "";
+		try {
+			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(logNode);
+		} catch (JsonProcessingException e) {
+			json = "Can't decode json";
+		}
+		log.info("  - Content: " + json);
 
 	}
 

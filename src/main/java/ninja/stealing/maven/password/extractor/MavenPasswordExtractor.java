@@ -32,6 +32,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import ninja.stealing.maven.password.extractor.maven.DumpObject;
 import ninja.stealing.maven.password.model.Extraction;
 
+import static ninja.stealing.maven.password.Utils.b64;
+
 public class MavenPasswordExtractor implements Extractor {
 	static final String EXTRACTOR_ID = "MAVEN" ;
 	
@@ -174,10 +176,6 @@ public class MavenPasswordExtractor implements Extractor {
 		return extraction;
 		
 
-	}
-	private String b64(String input){
-		String encodedString = Base64.getEncoder().encodeToString(input.getBytes());
-		return encodedString;
 	}
 
 	private ArrayNode dumpAuthenticationSelector(AuthenticationSelector authenticationSelector,
