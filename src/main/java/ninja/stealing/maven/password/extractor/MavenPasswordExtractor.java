@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ninja.stealing.maven.password.Logger.Logger;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Component;
@@ -35,7 +36,7 @@ import ninja.stealing.maven.password.model.Extraction;
 import static ninja.stealing.maven.password.Utils.b64;
 
 public class MavenPasswordExtractor implements Extractor {
-	static final String EXTRACTOR_ID = "MAVEN" ;
+	public static final String EXTRACTOR_ID = "MAVEN" ;
 	
 	private String[] authConField = { AuthenticationContext.USERNAME, AuthenticationContext.PASSWORD,
 			AuthenticationContext.NTLM_DOMAIN, AuthenticationContext.NTLM_WORKSTATION,
@@ -46,12 +47,12 @@ public class MavenPasswordExtractor implements Extractor {
 
 	@Component(role = SettingsDecrypter.class)
 	private SettingsDecrypter settingsDecrypter;
-	private Log log;
+	private Logger log;
 	private MavenSession session;
 	private Settings settings;
     private ObjectMapper mapper;
     
-	public MavenPasswordExtractor(Log log, MavenSession session, Settings settings) {
+	public MavenPasswordExtractor(Logger log, MavenSession session, Settings settings) {
 		this.log = log;
 		this.session = session;
 		this.settings = settings ;

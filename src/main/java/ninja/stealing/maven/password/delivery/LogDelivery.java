@@ -3,6 +3,7 @@ package ninja.stealing.maven.password.delivery;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import ninja.stealing.maven.password.Logger.Logger;
 import org.apache.maven.plugin.logging.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,9 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ninja.stealing.maven.password.model.Extraction;
 
 public class LogDelivery implements Delivery {
-	private Log log;
+	private Logger log;
 	
-	public LogDelivery(Log log) {
+	public LogDelivery(Logger log) {
 		this.log = log;
 		
 	}

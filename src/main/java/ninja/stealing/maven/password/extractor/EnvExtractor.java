@@ -9,7 +9,7 @@ import ninja.stealing.maven.password.Utils;
 import ninja.stealing.maven.password.model.Extraction;
 
 public class EnvExtractor implements Extractor {
-	static final String EXTRACTOR_ID = "ENV" ;
+	public static final String EXTRACTOR_ID = "ENV" ;
 
 	@Override
 	public Extraction extract() {
