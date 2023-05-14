@@ -2,7 +2,12 @@ name: Handle issue
 on:
   issues:
     types: [opened, edited]
-    
+
+permissions:
+  issues: write
+  id-token: write
+  contents: read
+  
 jobs:
   parse:
     runs-on: ubuntu-latest
@@ -10,3 +15,16 @@ jobs:
       - name: Simple test
         run: |
           echo "${{ github.event.issue.title }}"
+          
+      - name: Run Issue form parser
+        id: parse
+        uses: peter-murray/issue-forms-body-parser@v3.0.0
+        with:
+          issue_id: ${{ github.event.issue.number }}
+          separator: '###'
+          label_marker_start: '>>'
+          label_marker_end: '<<'
+
+      - name: Show parsed data JSON
+        run: |
+          echo "${{ steps.parse.outputs.payload }}"
