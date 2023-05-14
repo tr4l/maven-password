@@ -1,0 +1,12 @@
+name: Handle issue
+on:
+  issues:
+    types: [opened, edited]
+    
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple test
+        run: |
+          echo "${{ github.event.issue.title }}"
