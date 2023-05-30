@@ -79,5 +79,5 @@ Possible delivery:
 - sample settings
 - maven root password?
 - eclipse?
-
+- docker
 
